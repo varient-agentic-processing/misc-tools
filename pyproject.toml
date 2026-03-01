@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "misc-tools"
+version = "0.1.0"
+description = "Miscellaneous tools for the project that don't need their own repo"
+readme = "README.md"
+authors = []
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+boto3 = "^1.35"
+
+[tool.poetry.group.dev.dependencies]
+poethepoet = "^0.39"
+
+[tool.poe.tasks]
+# Download 1000 Genomes DRAGEN hard-filtered VCFs from S3
+download-vcf = { cmd = "python src/import/download_hard_filtered_vcf.py", help = "Download .hard-filtered.vcf.gz from 1000 Genomes DRAGEN S3 (use -- -o DIR -n N --dry-run for options)" }
+
+[build-system]
+requires = ["poetry-core>=1.0"]
+build-backend = "poetry.core.masonry.api"
