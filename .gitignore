@@ -12,6 +12,8 @@ build/
 develop-eggs/
 dist/
 downloads/
+reference-download/
+vcf-transfer/
 eggs/
 .eggs/
 lib/
@@ -50,9 +52,12 @@ coverage.xml
 *.mo
 *.pot
 
-# Environments
+# Environments and secrets
 .venv
 venv/
+.env
+.env.*
+!.env.example
 env/
 ENV/
 env.bak/

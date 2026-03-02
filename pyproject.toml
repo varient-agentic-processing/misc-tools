@@ -16,6 +16,25 @@ poethepoet = "^0.39"
 [tool.poe.tasks]
 # Download 1000 Genomes DRAGEN hard-filtered VCFs from S3
 download-vcf = { cmd = "python src/import/download_hard_filtered_vcf.py", help = "Download .hard-filtered.vcf.gz from 1000 Genomes DRAGEN S3 (use -- -o DIR -n N --dry-run for options)" }
+# Transfer 25 individuals (S3→GCS), spanning populations, optional bcftools stats
+transfer-1000g-vcf = { cmd = "python src/import/transfer_1000g_vcf.py", help = "Transfer 25 1000G VCFs to GCS (use -- -s SUFFIX -j 8 --verify --dry-run)" }
+# Create GCP service accounts (ClickHouse, Pipeline, MCP Server) with IAM roles
+gcp-service-accounts = { cmd = "bash scripts/create_gcp_service_accounts.sh", help = "Create GCP service accounts for pipeline (use -- -p PROJECT -n for dry-run)" }
+# Create GCS bucket and folder layout (run after gcp-service-accounts)
+gcs-bucket-layout = { cmd = "bash scripts/create_gcs_bucket_layout.sh", help = "Create GCS bucket and folder structure (use -- -s SUFFIX -p PROJECT -n for options)" }
+# Download GRCh38 reference FASTA, generate .fai, upload to GCS (run after gcs-bucket-layout)
+reference-fasta = { cmd = "bash scripts/setup_reference_fasta.sh", help = "Download GRCh38 ref, index with samtools faidx, upload to GCS (use -- -s SUFFIX -p PROJECT -n)" }
+# Create Firestore database in Native mode (run after gcp-service-accounts)
+firestore-setup = { cmd = "bash scripts/create_firestore_setup.sh", help = "Create Firestore database for pipeline tracking (use -- -p PROJECT -n for options)" }
+# Create Artifact Registry Docker repository (run after gcp-service-accounts)
+artifact-registry = { cmd = "bash scripts/create_artifact_registry.sh", help = "Create Artifact Registry Docker repo for pipeline images (use -- -p PROJECT -n for options)" }
+# Create firewall rules for ClickHouse VM (run after gcp-service-accounts)
+networking = { cmd = "bash scripts/create_networking.sh", help = "Create firewall rules for ClickHouse (use -- -i WORKSTATION_IP -p PROJECT -n for options)" }
+# ClickHouse VM management (status, start, stop)
+clickhouse-status = { cmd = "bash scripts/clickhouse_vm.sh status", help = "Show if ClickHouse VM is up (use -- -i INSTANCE -z ZONE -p PROJECT)" }
+clickhouse-start = { cmd = "bash scripts/clickhouse_vm.sh start", help = "Start the ClickHouse VM (use -- -i INSTANCE -z ZONE -p PROJECT)" }
+clickhouse-stop = { cmd = "bash scripts/clickhouse_vm.sh stop", help = "Stop the ClickHouse VM (use -- -i INSTANCE -z ZONE -p PROJECT)" }
+vm-list = { cmd = "bash scripts/clickhouse_vm.sh list", help = "List all VMs in the project (use -- -p PROJECT)" }
 
 [build-system]
 requires = ["poetry-core>=1.0"]
