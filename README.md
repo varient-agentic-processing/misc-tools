@@ -2,6 +2,8 @@
 
 Miscellaneous tools for the project that don’t need their own repo. Managed with [Poetry](https://python-poetry.org/) for dependencies and [Poe the Poet](https://poethepoet.readthedocs.io/) for running tasks.
 
+**License:** [CC BY-NC 4.0](LICENSE) — non-commercial use only; commercial use requires prior written consent of the copyright holder.
+
 ## Setup
 
 - **Install Poetry** (if needed): <https://python-poetry.org/docs/#installation>
