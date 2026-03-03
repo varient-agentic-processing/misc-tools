@@ -81,3 +81,7 @@ dmypy.json
 
 # Ruff
 .ruff_cache/
+
+giab-hg002-benchmark/
+clinvar-download/
+logs/
