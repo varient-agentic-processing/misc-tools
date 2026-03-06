@@ -95,7 +95,7 @@ run gcloud iam service-accounts create pipeline-sa \
   --description="Service account for pipeline jobs" \
   || true
 
-for role in roles/storage.objectAdmin roles/batch.jobsEditor roles/run.invoker roles/datastore.user roles/logging.logWriter roles/secretmanager.secretAccessor; do
+for role in roles/storage.objectAdmin roles/batch.jobsEditor roles/batch.agentReporter roles/artifactregistry.reader roles/run.invoker roles/datastore.user roles/logging.logWriter roles/secretmanager.secretAccessor; do
   echo "  Granting $role"
   grant_role "pipeline-sa" "$role"
 done
