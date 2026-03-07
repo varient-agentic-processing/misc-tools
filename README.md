@@ -49,14 +49,14 @@ poetry run python src/import/download_hard_filtered_vcf.py --help
 
 | Step | Task | Command |
 |------|------|---------|
-| 1 | Service accounts | `poe gcp-service-accounts` (use `-- -p PROJECT -n` for dry-run) |
-| 2 | GCS bucket layout | `poe gcs-bucket-layout -- -s SUFFIX` |
-| 3 | Reference FASTA | `poe reference-fasta -- -s SUFFIX` |
-| 4 | Firestore | `poe firestore-setup` |
-| 5 | 1000G VCF transfer | `poe transfer-1000g-vcf -- -s SUFFIX --verify` |
-| 6 | GIAB HG002 benchmark | `poe transfer-giab-hg002-benchmark -- -s SUFFIX` |
-| 7 | ClinVar | `poe transfer-clinvar -- -s SUFFIX` |
-| 8 | Artifact Registry | `poe artifact-registry` |
+| 1 | Service accounts | `poetry run poe gcp-service-accounts` (use `-- -p PROJECT -n` for dry-run) |
+| 2 | GCS bucket layout | `poetry run poe gcs-bucket-layout -- -s SUFFIX` |
+| 3 | Reference FASTA | `poetry run poe reference-fasta -- -s SUFFIX` |
+| 4 | Firestore | `poetry run poe firestore-setup` |
+| 5 | 1000G VCF transfer | `poetry run poe transfer-1000g-vcf -- -s SUFFIX --verify` |
+| 6 | GIAB HG002 benchmark | `poetry run poe transfer-giab-hg002-benchmark -- -s SUFFIX` |
+| 7 | ClinVar | `poetry run poe transfer-clinvar -- -s SUFFIX` |
+| 8 | Artifact Registry | `poetry run poe artifact-registry` |
 
 Replace `SUFFIX` with your bucket suffix (e.g. `my-project`) and `PROJECT` with your GCP project ID.
 
@@ -90,7 +90,7 @@ Replace `SUFFIX` with your bucket suffix (e.g. `my-project`) and `PROJECT` with 
    my-task.help = "Short description for poe"
    ```
 
-   Then run it with `poe my-task` or `poe my-task -- --script-args`.
+   Then run it with `poetry run poe my-task` or `poetry run poe my-task -- --script-args`.
 
 ## Current tools
 
